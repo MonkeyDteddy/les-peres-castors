@@ -1,0 +1,63 @@
+.card
+{
+    img 
+    {
+        height: 220px;
+    }
+    em 
+    {
+        font-size: 0.75em;
+    }
+    span 
+    {
+        font-size: 0.7em;
+    }
+    margin-bottom: 5%;
+}
+
+.menu-profil
+{
+    background-color: white;
+    padding: 3%;
+    //border: 1px solid black;
+    margin-top: 5%;
+    a
+    {
+        &:link
+        {
+            text-decoration: none;
+        }
+    }
+    
+}
+
+
+
+.content-profil
+{
+    
+    display: none;
+}
+
+.icone
+{
+    float: right;
+    padding-top: 3px;
+}
+
+
+.registration-form
+{
+    margin-top: 5%;
+}
+
+.pagination
+{
+    margin-top: 2%;
+}
+
+.main-div
+{
+    margin-left: 3%;
+    margin-right: 3%;
+}

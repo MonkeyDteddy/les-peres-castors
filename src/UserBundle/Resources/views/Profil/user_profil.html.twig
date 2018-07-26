@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {{ user.username }} <br>
+    {{ user.email }} <br>
+    {{ app.user.lastLogin|date('d-m-Y H:i:s') }} <br>
+{% endblock body %}

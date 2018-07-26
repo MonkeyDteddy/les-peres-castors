@@ -1,0 +1,28 @@
+.btn-view-story
+{
+    float: right;
+}
+
+.card-text
+{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.card-title
+{
+    font-weight: bold;
+    cursor: pointer;
+    
+    a 
+    {
+        color: #272529;
+        &:link
+        {
+            text-decoration: none;
+        }
+        &:hover {
+            color: #007bff;
+        }
+    }
+}

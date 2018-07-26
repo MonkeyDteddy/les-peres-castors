@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/css?family=Hind:400,500,600,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('assetic/bootstrap_css.css') }}" />
+        <link rel="stylesheet" href="{{ asset('../public/build/css/app.css') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body style="">
+        <div class="main-div">
+            <img src="{{asset('img/categories/gizeh.jpg')}}" style="width:100%;height:350px"/>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('platform_homepage') }}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                     
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
+                        </li>
+                    {% else %}
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_security_login') }}">Se connecter</a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_registration_register') }}">S'enregister</a>
+                        </li>
+                    {% endif %}   
+                </ul>
+                <!--
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                -->
+            </div>
+        </nav>
+
+        </div>
+        <div class="main-div">
+            <div class="row">
+                <div class="col-8">
+                {% block body %}
+                {% endblock body %}
+                </div>
+                
+                    <div class="col-4">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        {{ render(controller('PlatformBundle:Default:menuProfil'))}}
+                        
+                        {% endif %}
+                        <div >
+                            {{ render(controller('PlatformBundle:Default:menuCategories'))}}
+                            
+
+                    </div>
+                    </div>   
+                
+            </div>
+        </div>
+        {% block javascripts %}
+            <script src="{{ asset('assetic/jquery_js.js') }}"></script>
+            <script src="{{ asset('assetic/bootstrap_js.js') }}"></script>
+            <script src="{{ asset('../public/build/js/app.js') }}"></script>
+            
+        {% endblock %}
+    </body>
+</html>

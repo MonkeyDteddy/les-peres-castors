@@ -1,0 +1,10 @@
+<div class="menu-profil">
+    <span class="name-profil">Bonjour {{app.user.username}}<a href="#"><i class="fas fa-chevron-down fa-1x icone" aria-hidden="true"></i></a></span>
+     <div class="content-profil">
+        <ul>
+            
+            <li><a href="{{ path('add_story') }}">écrire un article</a></li>
+            <li><a href="{{ path('view_my_stories', {'id': app.user.id}) }}">mes articles</a></li>
+        </ul>
+     </div>
+</div>

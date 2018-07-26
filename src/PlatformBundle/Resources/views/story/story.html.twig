@@ -1,0 +1,113 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="view-story" >
+      {% if story.imageStory != null %}
+        <img class="card-img-top" src="{{ asset('img/story/') }}{{story.imageStory.id}}.{{story.imageStory.url}}" alt="Card image cap">
+        {% else %}
+        <img class="card-img-top" src="{{ asset('img/story/default.jpg') }}" alt="Card image cap">
+        {% endif %}
+        
+      <div class="view-story-text-div">
+        <em><span>publié le {{ story.date|date('d/m/y') }} par {{ story.author}}</span></em>
+        <h2 class="view-story-title">{{ story.title }}</h2>
+        <p class="view-story-content">{{ story.content }}</p>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and story.author == user %}
+        <a href="{{ path('edit_story', {'id': story.id}) }}" class="btn btn-primary">modifier</a>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+              Supprimer
+            </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Supprimer un article</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Voulez-vous vraiment supprimer l'article "{{ story.title }}" ?
+                  </div>
+                  <div class="modal-footer">
+                    <a href="{{ path('remove_story', {'id': story.id}) }}" class="btn btn-danger">supprimer votre article</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            
+        {% endif %}
+        
+      </div>
+    </div>
+    <div class="list-comments">
+      <ul>
+      {% for comment in listComments %}
+        <li>
+          {% if comment.author == user %}
+            <span class="comment-name">Moi</span>
+          {% else %}
+            <span class="comment-name">{{ comment.author}}</span>
+            
+          {% endif %}
+          <em style="float:right; font-size:75%">{{ comment.date|date('d/m/y H:i:s') }}</em>
+          <p>{{ comment.content }}</p>
+          
+           {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and comment.author == user %}
+           <br>
+           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2">
+              Supprimer
+            </button>
+            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Supprimer un commentaire</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Voulez-vous vraiment supprimer ce commentaire ?
+                  </div>
+                  <div class="modal-footer">
+                    <a href="{{ path('remove_comment', {'id': comment.id}) }}" style="color:white" class="btn btn-danger">supprimer</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endif %}
+          
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            
+    {{ form_start(formComment, {'attr': {'class': 'form-horizontal'}}) }}
+
+  {# Idem pour un autre champ. #}
+  <div class="form-group">
+    {{ form_label(formComment.content, " ", {'label_attr': {'class': ' control-label'}}) }}
+    <div class="">
+      {{ form_widget(formComment.content, {'attr': {'class': 'form-control', 'placeholder': 'écrivez votre commentaire...'}}) }}
+    </div>
+  </div>
+
+
+  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+ 
+
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {{ form_rest(formComment) }}
+
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(formComment) }}
+    {% else %}
+     <a href="{{ path('fos_user_security_login') }}">veuillez vous connecter pour poster un commentaire</a>
+    {% endif %}
+
+{% endblock %}

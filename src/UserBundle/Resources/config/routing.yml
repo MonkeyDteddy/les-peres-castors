@@ -1,0 +1,4 @@
+my_profil:
+  path: /mon-profil/{id}
+  defaults:
+    _controller: UserBundle:Default:myProfil

@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h2 class="category-name">{{ category.name }}</h2>
+    <img class="img-category" style="width:100%; heigth: 74px;" src="{{ asset('img/categories/') }}{{ category.img }}" />
+    
+        <div class="row">
+        {% if listStories is empty %}
+            <div class="col-6">
+                <p>Il n' a aucun article dans cette catégorie actuellement</p>
+                </div>
+            {% else %}
+            <div class="text-center pagination">{{ knp_pagination_render(listStories) }}</div>
+            
+            {% for story in listStories %}
+        
+        <div class="col-6">
+        <div class="card" style="">
+         {% if story.imageStory != null %}
+        <img class="card-img-top" src="{{ asset('img/story/') }}{{story.imageStory.id}}.{{story.imageStory.url}}" alt="Card image cap">
+        {% else %}
+        <img class="card-img-top" src="{{ asset('img/story/default.jpg') }}" alt="Card image cap">
+        {% endif %}
+        <div class="card-body">
+          <em>publié le {{ story.date|date('Y-m-d') }} par {{ story.author }}</em><br>
+          <span>{{ story.category.name }}</span>
+          <h5 class="card-title"><a href="{{ path('view_story', {'id': story.id}) }}">{{ story.title }} </a></h5>
+          <p class="card-text">{{ story.content|slice(0, 150) ~ '...'  }}</p>
+          <a class="btn-view-story" href="{{ path('view_story', {'id': story.id}) }}" ><i class="fas fa-arrow-circle-right fa-3x "></i></a>
+        </div>
+      </div>
+      </div>
+
+         {% endfor %}
+        {% endif %}
+        </div>
+   
+{% endblock %}

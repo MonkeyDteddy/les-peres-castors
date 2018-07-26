@@ -1,0 +1,54 @@
+.list-comments{
+    li{
+        //border: 1px solid black;
+        padding: 10px;
+        margin: 20px;
+        background-color: white;
+    }
+    a
+    {
+        &:link
+        {
+            text-decoration: none;
+            color: red;
+        }
+        &:hover
+        {
+            //font-size: 110%;
+        }
+    }
+}
+
+.view-story
+{
+    img 
+    {
+        width: 100%;
+    }
+}
+
+.view-story-text-div
+{
+    background-color: white;
+    padding: 4%;
+}
+
+.view-story-content
+{
+    font-size: 130%;
+    margin-bottom: 5%;
+    margin-top: 3%;
+}
+
+.view-story-text-div
+{
+    h2
+    {
+        margin-top: 5%;
+    }
+}
+
+.comment-name
+{
+    color: blue;
+}

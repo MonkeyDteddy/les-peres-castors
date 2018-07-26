@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<div class="text-center pagination">{{ knp_pagination_render(stories) }}</div>
+<div class="row  div-stories-home">
+  {% for story in stories %}
+    
+      <div class="col-6">
+        <div class="card" style="">
+        {% if story.imageStory != null %}
+        <img class="card-img-top" src="{{ asset('img/story/') }}{{story.imageStory.id}}.{{story.imageStory.url}}" alt="Card image cap">
+        {% else %}
+        <img class="card-img-top" src="{{ asset('img/story/default.jpg') }}" alt="Card image cap">
+        {% endif %}
+        <div class="card-body">
+          
+          <em>publié le {{ story.date|date('Y-m-d') }} par {{ story.author }}</em><br>
+          <span>{{ story.category.name }}</span>
+          <h5 class="card-title"><a href="{{ path('view_story', {'id': story.id}) }}">{{ story.title }}</a></h5>
+          <p class="card-text">{{ story.content|slice(0, 150) ~ '...'  }}</p>
+          
+          
+          <a class="btn-view-story" href="{{ path('view_story', {'id': story.id}) }}" ><i class="fas fa-arrow-circle-right fa-3x"></i></a>
+        </div>
+      </div>
+      </div>
+
+  {% endfor %}
+      </div>
+  <div class="text-center">{{ knp_pagination_render(stories) }}</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+platform_homepage:
+    path:     /
+    defaults: 
+        _controller: PlatformBundle:Default:index
+view_story:
+    path: /story/{id}
+    defaults:
+        _controller: PlatformBundle:Default:viewStory
+    requirements:
+        id: \d+
+add_story:
+    path: /creer-un-article/
+    defaults:
+        _controller: PlatformBundle:Default:addStory
+
+edit_story:
+    path: /modifier-un-article/{id}
+    defaults:
+        _controller: PlatformBundle:Default:editStory
+    requirements:
+        id: \d+
+
+remove_story:
+    path: /supprimer-un-article/{id}
+    defaults:
+        _controller: PlatformBundle:Default:removeStory
+    requirements:
+        id: \d+
+
+remove_comment:
+    path: /supprimer-un-commentaire/{id}
+    defaults:
+        _controller: PlatformBundle:Comments:removeComment
+    requirements:
+        id: \d+
+
+view_category:
+    path: /categorie/{id}
+    defaults:
+        _controller: PlatformBundle:Default:viewCategory
+    requirements:
+        id: \d+
+    
+view_my_stories:
+    path: /mes-articles/{id}
+    defaults:
+        _controller: PlatformBundle:Default:viewMyStories
+    requirements:
+        id: \d+

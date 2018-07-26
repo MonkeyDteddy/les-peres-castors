@@ -1,0 +1,34 @@
+$color_head: red;
+
+body {
+
+    //background-color: #604c8d !important;
+    background-color: #dadeec !important;
+    background-size: cover;
+    //background-position: fixed;
+    padding: 0;
+    margin: 0;
+    font-family: 'Hind', sans-serif;
+    ul {
+        list-style: none;
+    }
+    p{
+        margin: 0;
+    }
+}
+
+.container
+{
+    background-color: #dadeec;
+    
+}
+
+.div-stories-home
+{
+    margin-top: 5%;
+}
+
+@import 'view_story';
+@import 'home';
+@import 'category';
+@import 'card';
